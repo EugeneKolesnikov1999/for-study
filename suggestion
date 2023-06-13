@@ -1,0 +1,19 @@
+ panel.appendTo(_windowContainer.find('.body')); //Панель эта главная рабочая область окна
+            panel.add({
+                grid: new Grid(),
+                form: new Form()
+            }); //На нее добавляем список аптек и таблицу - анкету
+
+            panel.container['grid'].rowClick(function(record, index){
+                panel.container['form'].loadData(record.id);
+            }); //При выборе аптеки подгружаем анкету
+
+            header.click(function(){
+                panel.hide();
+                header.toggle(function(){
+                    panel.show();                    
+                    panel.container['grid'].height($('#window').outerHeight() - header.height());
+                    panel.container['form'].height($('#window').outerHeight() - header.height());
+                });
+            }); 
+    
